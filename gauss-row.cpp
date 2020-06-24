@@ -11,18 +11,18 @@ void gauss_row(double a[N][N+1]){
 		s=a[i][i];
 		m=i;
 		for(j=i+1;j<N;j++){
-			//ѡ��Ԫ
+			//选主元
 			if(fabs(a[j][i])>s)
 				m=j;
 		}
 		for(j=i;j<N+1;j++){
-			//����m����i��
+			//交换m行与i行
 			t=a[i][j];
 			a[i][j]=a[m][j];
 			a[m][j]=t;
 		}
 		for(j=i+1;j<N;j++){
-			//��Ԫ
+			//消元
 			t=a[j][i]/a[i][i];
 			for(k=i+1;k<N+1;k++)
 				a[j][k]=a[j][k]-t*a[i][k];
@@ -31,13 +31,13 @@ void gauss_row(double a[N][N+1]){
 	x[N-1]=a[N-1][N]/a[N-1][N-1];
 
 	for(i=N-2;i>=0;i--){
-		//�ش����
+		//回代求解
 		s=a[i][N];
 		for(j=i+1;j<N;j++)
 			s=s-a[i][j]*x[j];
 		x[i]=s/a[i][i];
 	}
-	for(i=0;i<N;i++)//�����
+	for(i=0;i<N;i++)//输出解
 		printf("x[%d]=%.6lf\n",i+1,x[i]);
 }
 
